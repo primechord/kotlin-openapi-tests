@@ -2,8 +2,8 @@ package client
 
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import config.Configuration
-import config.Credentials
+import configuration.creds
+import configuration.logging
 import io.qameta.allure.okhttp3.AllureOkHttp3
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,7 +12,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 
 open class RetrofitClient {
 
-    private var baseUrl = Credentials.baseUrl
+    private var baseUrl = creds.baseUrl()
     private var apiKey = ""
 
     fun withApiKey(apiKey: String) = apply { this.apiKey = apiKey }
@@ -22,8 +22,8 @@ open class RetrofitClient {
         val okhttpClient = OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor(apiKey))
             .addInterceptor(AllureOkHttp3())
-        if (Configuration.httpLogging) {
-            okhttpClient.addInterceptor(HttpLoggingInterceptor().setLevel(Configuration.loggingLevel))
+        if (logging.httpLogging()) {
+            okhttpClient.addInterceptor(HttpLoggingInterceptor().setLevel(logging.loggingLevel()))
         }
 
         val jsonMapper = JsonMapper.builder()

@@ -52,6 +52,7 @@ dependencies {
     implementation("io.qameta.allure:allure-java-commons:$allureVersion")
     implementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     implementation("io.kotest:kotest-assertions-core-jvm:4.3.2")
+    implementation("org.aeonbits.owner:owner:1.0.12")
 }
 
 openApiGenerate {

@@ -10,12 +10,12 @@ import org.apache.http.HttpStatus.SC_OK
 import org.junit.jupiter.api.Test
 import utils.AllureStep.step
 import kotlin.random.Random
-import config.Credentials as Creds
+import configuration.creds
 
 class StoreTests {
 
     private val store =
-        RetrofitClient().withBaseUrl(Creds.baseUrl).withApiKey(Creds.apiKey).createService(StoreApi::class.java)
+        RetrofitClient().withBaseUrl(creds.baseUrl()).withApiKey(creds.apiKey()).createService(StoreApi::class.java)
 
     @Test
     fun `Get order by ID`() {
